@@ -1,0 +1,12 @@
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.AssemblyInfoInputs.cache
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.AssemblyInfo.cs
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.csproj.CoreCompileInputs.cache
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.sourcelink.json
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/bin/Debug/net9.0/BookstoreLibrary.deps.json
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/bin/Debug/net9.0/BookstoreLibrary.dll
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/bin/Debug/net9.0/BookstoreLibrary.pdb
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.dll
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/refint/BookstoreLibrary.dll
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/BookstoreLibrary.pdb
+/Users/heddanilsen/Library/CloudStorage/OneDrive-ØstfoldUniversityCollege/4.semester/rammeverk.NET/CodingAssignment1.NET/BookstoreLibrary/obj/Debug/net9.0/ref/BookstoreLibrary.dll

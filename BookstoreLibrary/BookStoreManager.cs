@@ -9,15 +9,16 @@ namespace BookstoreLibrary
         public void AddBook(Book book)
         {
             _books.Add(book);
-            Console.WriteLine($"Book {book.Title} added to the store");
+            Console.WriteLine($"Book {book} added to the store");
         }
 
         // Metode for å kunne vise alle bøker i listen basert på ISBN eller tittel
-        public Book? FindBook(string titleOrISBN)
-        {
-            return _books.FirstOrDefault(b => b.Title.Equals(titleOrISBN, StringComparison.OrdinalIgnoreCase) 
-            || b.ISBN.Equals(titleOrISBN));
-        }
+    public Book? FindBook(string titleOrISBN)
+    {
+        return _books.FirstOrDefault(b => b.Title.Equals(titleOrISBN, StringComparison.OrdinalIgnoreCase) 
+        || b.ISBN.Equals(titleOrISBN, StringComparison.OrdinalIgnoreCase));
+    }
+
 
         // Metode for å kunne kjøpe en bok hvis den er tilgjengelig
         public bool PurchaseBook(string isbn, Customer customer)
@@ -26,7 +27,7 @@ namespace BookstoreLibrary
             if (book != null)
             {
                 _books.Remove(book);
-                Console.WriteLine($"Book {book.Title} purchased by {customer.FirstName} {customer.LastName}");
+                Console.WriteLine($"Book {book} purchased by {customer.FirstName} {customer.LastName}");
                 return true;
             }
             Console.WriteLine($"Book with ISBN {isbn} not found");  
