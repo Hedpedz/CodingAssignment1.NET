@@ -5,21 +5,22 @@ namespace BookstoreLibrary
     public class Customer
     {
         public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
+        public List<Book> PurchaseHistory { get; set; } = new List<Book>();
 
         // Konstruktør for å kunne opprette en kunde
-        public Customer(string firstName, string lastName, string email)
+        public Customer(string firstName, string id, string email)
         {
             FirstName = firstName;
-            LastName = lastName;
+            Id = Guid.NewGuid().ToString();
             Email = email;
         }
 
         // Metode for å kunne vise informasjon om kunden
         public override string ToString()
         {
-            return $"First Name: {FirstName}, Last Name: {LastName}, Email: {Email}";
+            return $"Hello {FirstName}, your ID is: {Id}, and email: {Email}";
         }
     }
 }
