@@ -1,26 +1,56 @@
-namespace BookstoreLibrary 
-{
+using System;
+using System.Collections.Generic;
 
-    // Klasse for å kunne lagre informasjon om en kunde
+namespace BookstoreLibrary
+{
+    /// <summary>
+    /// Represents a customer in the bookstore system.
+    /// </summary>
     public class Customer
     {
-        public string FirstName { get; set; }
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public List<Book> PurchaseHistory { get; set; } = new List<Book>();
+        /// <summary>
+        /// Gets the first name of the customer.
+        /// </summary>
+        public string FirstName { get; }
 
-        // Konstruktør for å kunne opprette en kunde
-        public Customer(string firstName, string id, string email)
+        /// <summary>
+        /// Gets the unique customer ID.
+        /// </summary>
+        public string Id { get; }
+
+        /// <summary>
+        /// Gets the email address of the customer.
+        /// </summary>
+        public string Email { get; }
+
+        /// <summary>
+        /// Gets the purchase history of the customer.
+        /// </summary>
+        public List<Book> PurchaseHistory { get; } = new List<Book>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Customer"/> class.
+        /// </summary>
+        /// <param name="firstName">The customer's first name.</param>
+        /// <param name="email">The customer's email address.</param>
+        /// <exception cref="ArgumentException">Thrown when input parameters are invalid.</exception>
+        public Customer(string firstName, string email)
         {
+            if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Customer name and email cannot be empty.");
+
             FirstName = firstName;
-            Id = Guid.NewGuid().ToString();
             Email = email;
+            Id = Guid.NewGuid().ToString(); // Automatically generates a unique ID
         }
 
-        // Metode for å kunne vise informasjon om kunden
+        /// <summary>
+        /// Returns a string representation of the customer.
+        /// </summary>
+        /// <returns>A formatted string containing customer details.</returns>
         public override string ToString()
         {
-            return $"Hello {FirstName}, your ID is: {Id}, and email: {Email}";
+            return $"Customer: {FirstName}, ID: {Id}, Email: {Email}";
         }
     }
 }

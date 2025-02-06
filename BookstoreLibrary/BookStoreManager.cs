@@ -1,104 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace BookstoreLibrary
 {
-    public class BookStoreManager
+    /// <summary>
+    /// Manages the bookstore inventory and customer transactions.
+    /// </summary>
+    public class BookStoreManager : IBookstoreService
     {
-        // Lister for å kunne vise tilgjengelige bøker og kunders kjøp 
-        private List<Book> _inventory = new List<Book>();
-        private List<Customer> _customers = new List<Customer>();
+        private readonly List<Book> _inventory = new List<Book>();
+        private readonly List<Customer> _customers = new List<Customer>();
 
-
-        // Metode for å kunne legge til bøker i listen
+        /// <summary>
+        /// Adds a book to the bookstore inventory.
+        /// </summary>
+        /// <param name="book">The book to be added.</param>
+        /// <exception cref="ArgumentNullException">Thrown if the book is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if the book already exists in the inventory.</exception>
         public void AddBook(Book book)
         {
-            ValidateBook(book);
+            if (book == null)
+                throw new ArgumentNullException(nameof(book));
 
             if (_inventory.Any(b => b.ISBN == book.ISBN))
-            {
-                throw new ArgumentException($"Book with ISBN {book.ISBN} already exists");
-            }
+                throw new ArgumentException($"A book with ISBN {book.ISBN} already exists.");
+
             _inventory.Add(book);
-            Console.WriteLine($"Book {book} added to the store");
+            Console.WriteLine($"Book '{book.Title}' added successfully.");
         }
 
+        /// <summary>
+        /// Retrieves all books currently in the inventory.
+        /// </summary>
+        /// <returns>A list of all available books.</returns>
+        public List<Book> GetAllBooks() => _inventory;
 
-        // Metode for å kunne vise alle bøker i listen basert på ISBN eller tittel
-        public IEnumerable<Book> FindBook(string searchTerm)
+        /// <summary>
+        /// Searches for books by title or ISBN.
+        /// </summary>
+        /// <param name="searchTerm">The title or ISBN to search for.</param>
+        /// <returns>A list of books that match the search criteria.</returns>
+        /// <exception cref="ArgumentException">Thrown if the search term is empty.</exception>
+        public List<Book> FindBook(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
-            {
-                throw new ArgumentException("Search term cannot be empty");
-            }
+                throw new ArgumentException("Search term cannot be empty.");
 
-            return _inventory.Where(b => 
-                b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                b.ISBN == searchTerm);
+            var foundBooks = _inventory
+                .Where(b => b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) 
+                         || b.ISBN.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (!foundBooks.Any())
+                Console.WriteLine($"No books found for '{searchTerm}'.");
+
+            return foundBooks;
         }
 
-
-        // Metode for å kunne kjøpe en bok hvis den er tilgjengelig
+        /// <summary>
+        /// Processes the purchase of a book.
+        /// </summary>
+        /// <param name="isbn">The ISBN of the book to purchase.</param>
+        /// <param name="customer">The customer making the purchase.</param>
+        /// <returns>True if the purchase was successful; otherwise, false.</returns>
         public bool PurchaseBook(string isbn, Customer customer)
         {
             var book = _inventory.FirstOrDefault(b => b.ISBN == isbn);
-            
-            if (book != null && book.StockQuantity > 0)
-            {
-                book.StockQuantity--;
-                customer.PurchaseHistory.Add(book);
-                Console.WriteLine($"Book '{book.Title}' purchased by {customer.FirstName}. Remaining stock: {book.StockQuantity}");
 
-                if (book.StockQuantity == 0)
-                {
-                    _inventory.Remove(book); 
-                }
-                return true;
-            }
-
-            Console.WriteLine($"Book with ISBN {isbn} not found or out of stock.");
-            return false;
-        }
-
-            
-        
-
-
-
-        // Metode for å kunne vise alle tilgengelige bøker i listen
-        public void DisplayBooks()
-        {
-            if (_inventory.Count == 0)
-            {
-                Console.WriteLine("No books available");
-            }
-            else
-            {
-                Console.WriteLine("Available books:");
-                foreach (var book in _inventory)
-                {
-                    Console.WriteLine(book);
-                }
-            }
-        }
-        private void ValidateBook(Book book)
-        {
             if (book == null)
             {
-                throw new ArgumentNullException(nameof(book));
+                Console.WriteLine($"Book with ISBN {isbn} not found.");
+                return false;
             }
 
-            if (string.IsNullOrWhiteSpace(book.ISBN))
+            if (book.StockQuantity == 0)
             {
-                throw new ArgumentException("ISBN is required");
+                Console.WriteLine($"'{book.Title}' is out of stock.");
+                return false;
             }
 
-            if (string.IsNullOrWhiteSpace(book.Title))
+            book.ReduceStock();
+            customer.PurchaseHistory.Add(book);
+            Console.WriteLine($"{customer.FirstName} purchased '{book.Title}'. Remaining stock: {book.StockQuantity}");
+
+            if (book.StockQuantity == 0)
             {
-                throw new ArgumentException("Title is required");
+                _inventory.Remove(book);
+                Console.WriteLine($"'{book.Title}' is now out of stock.");
             }
 
-            if (book.Price < 0)
-            {
-                throw new ArgumentException("Price cannot be negative");
-            }
+            return true;
         }
     }
 }
